@@ -7,16 +7,29 @@ public class controladorPrincipal {
 
     @FXML
     private void usuaris() {
-        System.out.println("Aquest metode encara no fa res");
+        try {
+            App.setRoot("PantallaUsuaris");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
     private void prestec() {
-        System.out.println("Aquest metode encara no fa res");
+        try {
+            App.setRoot("PantallaPrestec");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     @FXML
     private void llibres() {
-        System.out.println("Aquest metode encara no fa res");
+        try {
+            App.setRoot("PantallaLlibres");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
