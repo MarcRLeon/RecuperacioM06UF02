@@ -31,7 +31,8 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>19</version>
+            <version>16</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
