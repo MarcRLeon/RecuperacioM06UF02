@@ -21,7 +21,7 @@ public class controladorPrincipal {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PantallaUsuaris.fxml"));
             Parent root = loader.load();
 
-            Scene scene = new Scene(root, 670, 500); // Establece las dimensiones deseadas
+            Scene scene = new Scene(root, 600, 500); // Establece las dimensiones deseadas
             newStage.setScene(scene);
             newStage.show();
         } catch (IOException ex) {
