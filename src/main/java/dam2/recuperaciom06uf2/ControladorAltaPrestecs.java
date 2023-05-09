@@ -18,11 +18,12 @@ public class ControladorAltaPrestecs {
             currentStage.hide(); // Oculta la ventana actual
 
             Stage newStage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Principal.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PantallaPrestec.fxml"));
             Parent root = loader.load();
 
-            Scene scene = new Scene(root, 550, 350); // Establece las dimensiones deseadas
+            Scene scene = new Scene(root, 700, 500); // Establece las dimensiones deseadas
             newStage.setScene(scene);
+            newStage.setResizable(false);
             newStage.show();
         } catch (IOException ex) {
             ex.printStackTrace();

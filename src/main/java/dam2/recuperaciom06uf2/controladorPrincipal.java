@@ -21,7 +21,7 @@ public class controladorPrincipal {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PantallaUsuaris.fxml"));
             Parent root = loader.load();
 
-            Scene scene = new Scene(root, 600, 500); // Establece las dimensiones deseadas
+            Scene scene = new Scene(root, 700, 500); // Establece las dimensiones deseadas
             newStage.setScene(scene);
             newStage.setResizable(false);
             newStage.show();
@@ -59,7 +59,7 @@ public class controladorPrincipal {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PantallaLlibres.fxml"));
             Parent root = loader.load();
 
-            Scene scene = new Scene(root, 650, 450); // Establece las dimensiones deseadas
+            Scene scene = new Scene(root, 700, 500); // Establece las dimensiones deseadas
             newStage.setScene(scene);
             newStage.setResizable(false);
             newStage.show();

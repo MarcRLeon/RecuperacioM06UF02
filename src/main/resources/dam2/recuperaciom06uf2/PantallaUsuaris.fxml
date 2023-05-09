@@ -6,14 +6,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dam2.recuperaciom06uf2.ControladorUsuaris">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dam2.recuperaciom06uf2.ControladorUsuaris">
    <children>
       <Button layoutX="50.0" layoutY="30.0" mnemonicParsing="false" onAction="#tornarEnrere" text="Tornar Enrere" />
-      <Button layoutX="390.0" layoutY="325.0" mnemonicParsing="false" onAction="#modificar" text="Modificar" />
-      <Button layoutX="274.0" layoutY="325.0" mnemonicParsing="false" onAction="#eliminar" text="Donar Baixa" />
-      <Button layoutX="165.0" layoutY="325.0" mnemonicParsing="false" onAction="#afegir" text="Donar Alta" />
-      <TableView layoutX="70.0" layoutY="109.0" prefHeight="200.0" prefWidth="488.0" />
-      <Text layoutX="268.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuaris">
+      <Button layoutX="425.0" layoutY="376.0" mnemonicParsing="false" onAction="#modificar" text="Modificar" />
+      <Button layoutX="292.0" layoutY="376.0" mnemonicParsing="false" onAction="#eliminar" text="Donar Baixa" />
+      <Button layoutX="165.0" layoutY="376.0" mnemonicParsing="false" onAction="#afegir" text="Donar Alta" />
+      <TableView layoutX="39.0" layoutY="86.0" prefHeight="269.0" prefWidth="618.0" />
+      <Text layoutX="300.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuaris">
          <font>
             <Font size="20.0" />
          </font>

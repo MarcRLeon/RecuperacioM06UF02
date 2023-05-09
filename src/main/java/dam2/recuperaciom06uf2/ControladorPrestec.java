@@ -14,7 +14,7 @@ public class ControladorPrestec {
     @FXML
     private void tornarEnrere(Event event) {
         try {
-  Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // Obtiene el Stage de la ventana actual
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // Obtiene el Stage de la ventana actual
             currentStage.hide(); // Oculta la ventana actual
 
             Stage newStage = new Stage();
@@ -23,14 +23,24 @@ public class ControladorPrestec {
 
             Scene scene = new Scene(root, 550, 350); // Establece las dimensiones deseadas
             newStage.setScene(scene);
-            newStage.show();        } catch (IOException ex) {
+            newStage.show();
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     @FXML
-    private void afegir() throws IOException {
-        System.out.println("Aquest metode encara no fa res");
+    private void afegir(Event event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // Obtiene el Stage de la ventana actual
+        currentStage.hide();
+
+        Stage newStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DonarAltaPrestecs.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 800, 500);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
     @FXML
