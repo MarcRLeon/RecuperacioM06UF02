@@ -1,5 +1,6 @@
 package dam2.recuperaciom06uf2;
 
+import Classes.Prestec;
 import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -7,10 +8,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 public class ControladorPrestec {
 
+    
+    @FXML
+    TableView<Prestec> taula;
+    
     @FXML
     private void tornarEnrere(Event event) {
         try {
