@@ -4,18 +4,37 @@
  */
 package Classes;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
  *
  * @author marcr
  */
+@Entity()
+@Table(name = "llibre")
 public class Llibre {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "isbn", nullable = false)
     private String isbn;
+
+    @Column(name = "titol", nullable = false)
     private String titol;
+
+    @Column(name = "autor", nullable = false)
     private String autor;
+
+    @Column(name = "editorial", nullable = false)
     private String editorial;
+
+    @Column(name = "data_prestec", nullable = false)
     private Date data_prestec;
 
     public Llibre() {

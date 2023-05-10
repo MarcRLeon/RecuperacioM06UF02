@@ -4,16 +4,31 @@
  */
 package Classes;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
  *
  * @author marcr
  */
+@Entity()
+@Table(name = "prestec")
 public class Prestec {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "data_prestec",nullable = false)
     private Date data_prestec;
+
+    @Column(name = "data_devolucio", nullable = false)
     private Date data_devolucio;
+
+    @Column(name = "ID_USUARI", nullable = false)
     private int ID_USUARI;
 
     public Prestec() {

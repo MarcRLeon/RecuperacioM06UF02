@@ -12,13 +12,13 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dam2.recuperaciom06uf2.ControladorAltaPrestecs">
    <children>
-      <Text layoutX="359.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prestec">
+      <Text layoutX="370.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prestec">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
       <Button layoutX="41.0" layoutY="21.0" mnemonicParsing="false" onAction="#tornarEnrere" text="Tornar Enrere" />
-      <Button layoutX="342.0" layoutY="407.0" mnemonicParsing="false" onAction="#afegir" text="Donar Alta" />
+      <Button layoutX="370.0" layoutY="407.0" mnemonicParsing="false" onAction="#afegir" text="Donar Alta" />
       <TableView layoutX="148.0" layoutY="105.0" prefHeight="283.0" prefWidth="569.0" />
       <TextField fx:id="txt_idUsuari" layoutX="39.0" layoutY="158.0" prefHeight="31.0" prefWidth="91.0" />
       <TextField fx:id="txt_dataDevolucio" layoutX="41.0" layoutY="231.0" prefHeight="31.0" prefWidth="91.0" />
