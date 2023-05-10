@@ -9,12 +9,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ControladorAltaPrestecs {
 
     @FXML
     TableView<Prestec> taula;
+
+    @FXML
+    TextField txt_idUsuari, txt_dataDevolucio, txt_dataPrestec;
 
     @FXML
     private void tornarEnrere(Event event) {

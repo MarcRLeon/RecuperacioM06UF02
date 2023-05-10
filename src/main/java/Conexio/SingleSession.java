@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Classes;
+package Conexio;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -36,7 +36,7 @@ public class SingleSession {
      * Punt on es configura hibernate
      */
     private void InitSessionFactory() {
-        Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+        Configuration configuration = new Configuration().configure("C:\\Users\\marcr\\Documents\\NetBeansProjects\\RecuperacioM06UF2\\src\\main\\java\\Hibernate\\hibernate.cfg.xml");
         // Just en aquest punt, podem modificar els valors per defecte i assignar-ne d'altres
         // Aquesta és la llista de propietats disponibles: https://docs.jboss.org/hibernate/orm/4.3/javadocs/
         configuration.setProperty("hibernate.connection.username", "Marc");

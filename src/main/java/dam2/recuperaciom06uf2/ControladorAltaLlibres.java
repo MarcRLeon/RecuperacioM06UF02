@@ -1,6 +1,8 @@
 package dam2.recuperaciom06uf2;
 
 import Classes.Llibre;
+import Conexio.SingleSession;
+import com.github.javafaker.Faker;
 import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -9,13 +11,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.hibernate.Session;
 
 public class ControladorAltaLlibres {
 
-     @FXML
+    @FXML
     TableView<Llibre> taula;
-    
+
+    @FXML
+    TextField txt_isbn, txt_titol, txt_autor, txt_editorial, txt_dataPrestec;
+
     @FXML
     private void tornarEnrere(Event event) {
         try {
@@ -37,6 +44,20 @@ public class ControladorAltaLlibres {
 
     @FXML
     private void afegir() throws IOException {
-        System.out.println("Aquest metode encara no fa res");
+
+        Faker faker = new Faker();
+        Session session = SingleSession.getInstance().getSessio();
+        System.out.println(session.beginTransaction());
+
+        for (int i = 0; i < 1000; i++) {
+
+            Llibre llibre = new Llibre(faker.book().genre(), faker.book().title(), faker.book().author(), faker.book().publisher(),
+                    faker.date().birthday());
+
+            session.persist(llibre);
+        }
+
+        session.getTransaction().commit();
+
     }
 }
