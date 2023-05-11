@@ -47,6 +47,7 @@ public class ControladorAltaLlibres {
 
         Faker faker = new Faker();
         Session session = SingleSession.getInstance().getSessio();
+        
         System.out.println(session.beginTransaction());
 
         for (int i = 0; i < 1000; i++) {
