@@ -17,7 +17,7 @@ import java.util.Date;
  * @author marcr
  */
 @Entity()
-@Table(name = "llibre")
+@Table(name = "llibres")
 public class Llibre {
 
     @Id

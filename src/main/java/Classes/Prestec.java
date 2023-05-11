@@ -17,11 +17,11 @@ import java.util.Date;
  * @author marcr
  */
 @Entity()
-@Table(name = "prestec")
+@Table(name = "prestecs")
 public class Prestec {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "data_prestec",nullable = false)
     private Date data_prestec;
 

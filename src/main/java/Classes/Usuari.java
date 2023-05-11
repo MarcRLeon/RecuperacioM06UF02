@@ -17,11 +17,11 @@ import java.util.Date;
  * @author marcr
  */
 @Entity()
-@Table(name = "usuari")
+@Table(name = "usuaris")
 public class Usuari {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false)
     private int ID;
         

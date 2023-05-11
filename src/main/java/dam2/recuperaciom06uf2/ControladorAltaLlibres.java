@@ -55,7 +55,7 @@ public class ControladorAltaLlibres {
             Llibre llibre = new Llibre(faker.book().genre(), faker.book().title(), faker.book().author(), faker.book().publisher(),
                     faker.date().birthday());
 
-            session.persist(llibre);
+            session.save(llibre);
         }
 
         session.getTransaction().commit();
