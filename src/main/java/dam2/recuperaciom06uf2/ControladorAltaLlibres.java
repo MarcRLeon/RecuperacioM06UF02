@@ -27,7 +27,7 @@ public class ControladorAltaLlibres {
     private void tornarEnrere(Event event) {
         try {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // Obtiene el Stage de la ventana actual
-            currentStage.hide(); // Oculta la ventana actual
+            currentStage.close(); // Oculta la ventana actual
 
             Stage newStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PantallaLlibres.fxml"));
@@ -50,13 +50,10 @@ public class ControladorAltaLlibres {
 
         session.beginTransaction();
 
-        for (int i = 0; i < 1000; i++) {
+        Llibre llibre = new Llibre(txt_isbn.getText(), txt_titol.getText(), txt_autor.getText(), txt_editorial.getText(),
+                faker.date().birthday());
 
-            Llibre llibre = new Llibre(faker.book().genre(), faker.book().title(), faker.book().author(), faker.book().publisher(),
-                    faker.date().birthday());
-
-            session.save(llibre);
-        }
+        session.save(llibre);
 
         session.getTransaction().commit();
 

@@ -1,6 +1,8 @@
 package dam2.recuperaciom06uf2;
 
 import Classes.Usuari;
+import Conexio.SingleSession;
+import com.github.javafaker.Faker;
 import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.hibernate.Session;
 
 public class ControladorAltaUsuari {
 
@@ -18,7 +21,7 @@ public class ControladorAltaUsuari {
     TableView<Usuari> taula;
 
     @FXML
-    TextField txt_isbn, txt_titol, txt_autor, txt_editorial, txt_dataPrestec;
+    TextField txt_id, txt_nom, txt_direccio, txt_telefon, txt_dataPrestec;
 
     @FXML
     private void tornarEnrere(Event event) {
@@ -41,7 +44,17 @@ public class ControladorAltaUsuari {
 
     @FXML
     private void afegir() throws IOException {
-        System.out.println("Aquest metode encara no fa res");
+        Faker faker = new Faker();
+        Session session = SingleSession.getInstance().getSessio();
+        int id = Integer.parseInt(txt_id.getText()), telefon = Integer.parseInt(txt_telefon.getText());
+        session.beginTransaction();
+
+        Usuari usuari = new Usuari(id, txt_nom.getText(), txt_direccio.getText(), telefon,
+                faker.date().birthday());
+
+        session.save(usuari);
+
+        session.getTransaction().commit();
     }
 
 }
