@@ -16,7 +16,7 @@ import org.hibernate.cfg.Configuration;
 public class SingleSession {
 
     private static SingleSession instancia;
-    private SessionFactory factory, f2;
+    private SessionFactory factory;
     private Session s;
 
     private SingleSession() {
@@ -43,15 +43,10 @@ public class SingleSession {
         configuration.setProperty("hibernate.connection.password", "123");
         configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/recuperacio?createDatabaseIfNotExist=true");
 
-        try {
-            this.factory = configuration.buildSessionFactory();
-        } catch (HibernateException ex) {
-            ex.printStackTrace();
-        }
+        this.factory = configuration.buildSessionFactory();
 
         // en aquest punt una sessió
-        s = f2.openSession();
-
+        s = this.factory.openSession();
     }
 
     /**
