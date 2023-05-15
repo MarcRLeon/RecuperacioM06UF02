@@ -19,7 +19,7 @@ public class SingleSession {
     private SessionFactory factory;
     private Session s;
 
-    private SingleSession() {
+    public SingleSession() {
         InitSessionFactory();
     }
 

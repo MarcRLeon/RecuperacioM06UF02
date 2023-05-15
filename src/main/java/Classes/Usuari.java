@@ -17,8 +17,8 @@ import java.util.Date;
  * @author marcr
  */
 @Entity()
-@Table(name = "usuaris")
-public class Usuari {
+@Table(name = "Usuari")
+public class Usuari  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

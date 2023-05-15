@@ -1,10 +1,10 @@
 package dam2.recuperaciom06uf2;
 
 import Classes.Usuari;
+import Conexio.SingleSession;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Date;
-import java.util.ResourceBundle;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.hibernate.query.Query;
 
 public class ControladorUsuaris {
 
@@ -24,26 +25,35 @@ public class ControladorUsuaris {
     TableView<Usuari> taula;
 
     @FXML
-    private TableColumn<Usuari, String> id, nom, direccio;
+    TableColumn<Usuari, Integer> id;
 
     @FXML
-    private TableColumn<Usuari, Integer> telefon;
+    TableColumn<Usuari, String> nom, direccio;
 
     @FXML
-    private TableColumn<Usuari, Date> data_prestec;
+    TableColumn<Usuari, Integer> telefon;
 
-    private ObservableList<Usuari> dadesTaula;
+    @FXML
+    TableColumn<Usuari, Date> data_prestec;
 
-    
-    public void intializable(URL url, ResourceBundle rb) {
-        id.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        direccio.setCellValueFactory(new PropertyValueFactory<>("direccio"));
-        telefon.setCellValueFactory(new PropertyValueFactory<>("telefon"));
-        data_prestec.setCellValueFactory(new PropertyValueFactory<>("data_prestec"));
+    private final ObservableList<Usuari> dadesTaula = FXCollections.observableArrayList();
 
-        dadesTaula = FXCollections.observableArrayList();
-        taula.setItems(dadesTaula);
+    public void initialize() {
+        id = new TableColumn<>("ID");
+        nom = new TableColumn<>("nom");
+        direccio = new TableColumn<>("direccio");
+        telefon = new TableColumn<>("telefon");
+        data_prestec = new TableColumn<>("Data Prestec");
+
+        id.setCellValueFactory(new PropertyValueFactory("ID"));
+        nom.setCellValueFactory(new PropertyValueFactory("nom"));
+        direccio.setCellValueFactory(new PropertyValueFactory("direccio"));
+        telefon.setCellValueFactory(new PropertyValueFactory("telefon"));
+        data_prestec.setCellValueFactory(new PropertyValueFactory("data_prestec"));
+
+        taula.getColumns().addAll(id, nom, direccio, telefon, data_prestec);
+
+        carregarDades();
     }
 
     @FXML
@@ -86,5 +96,18 @@ public class ControladorUsuaris {
     @FXML
     private void eliminar(Event event) throws IOException {
         System.out.println("Aquest metode encara no fa res");
+    }
+
+    public void carregarDades() {
+        SingleSession session = new SingleSession();
+
+        Query query = session.getSessio().createQuery("FROM Usuari");
+        List<Usuari> llista = query.list();
+
+        for (Usuari usuari : llista) {
+            this.dadesTaula.add(usuari);
+        }
+
+        this.taula.setItems(dadesTaula);
     }
 }
