@@ -42,7 +42,7 @@ public class ControladorAltaUsuari {
     private final ObservableList<Usuari> dadesTaula = FXCollections.observableArrayList();
 
     @FXML
-    TextField txt_id, txt_nom, txt_direccio, txt_telefon, txt_dataPrestec;
+    TextField txt_nom, txt_direccio, txt_telefon, txt_dataPrestec;
 
     public void initialize() {
         id = new TableColumn<>("ID");
@@ -85,16 +85,13 @@ public class ControladorAltaUsuari {
     private void afegir() throws IOException {
         Faker faker = new Faker();
         Session session = SingleSession.getInstance().getSessio();
-        int id = Integer.parseInt(txt_id.getText()), telefon = Integer.parseInt(txt_telefon.getText());
+        int telefon = Integer.parseInt(txt_telefon.getText());
         session.beginTransaction();
 
-        Usuari usuari = new Usuari(id, txt_nom.getText(), txt_direccio.getText(), telefon,
-                faker.date().birthday());
-
+        Usuari usuari = new Usuari(txt_nom.getText(), txt_direccio.getText(), telefon, faker.date().birthday());
         session.save(usuari);
-
         session.getTransaction().commit();
-        
+
         dadesTaula.clear();
         carregarDades();
         taula.refresh();

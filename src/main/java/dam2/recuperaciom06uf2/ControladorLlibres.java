@@ -1,6 +1,7 @@
 package dam2.recuperaciom06uf2;
 
 import Classes.Llibre;
+import Conexio.SingleSession;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -18,35 +19,39 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.hibernate.query.Query;
 
 public class ControladorLlibres {
 
     @FXML
     private TableView<Llibre> taula;
     @FXML
-    private TableColumn<Llibre, String> colIsbn;
-    @FXML
-    private TableColumn<Llibre, String> colTitol;
-    @FXML
-    private TableColumn<Llibre, String> colAutor;
-    @FXML
-    private TableColumn<Llibre, String> colEditorial;
-    @FXML
-    private TableColumn<Llibre, Date> colDataPrestec;
+    TableColumn<Llibre, Integer> isbn;
 
-    private ObservableList<Llibre> datosTabla;
+    @FXML
+    TableColumn<Llibre, String> titol, autor, editorial;
 
-    public void initialize(URL url, ResourceBundle rb) {
-        // Configuración de las columnas
-        colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        colTitol.setCellValueFactory(new PropertyValueFactory<>("titol"));
-        colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
-        colEditorial.setCellValueFactory(new PropertyValueFactory<>("editorial"));
-        colDataPrestec.setCellValueFactory(new PropertyValueFactory<>("data_prestec"));
+    @FXML
+    TableColumn<Llibre, Date> data_prestec;
 
-        // Carga de los datos en la tabla
-        datosTabla = FXCollections.observableArrayList();
-        taula.setItems(datosTabla);
+    private final ObservableList<Llibre> dadesTaula = FXCollections.observableArrayList();
+
+    public void initialize() {
+        isbn = new TableColumn<>("ISBN");
+        titol = new TableColumn<>("Titol");
+        autor = new TableColumn<>("Autor");
+        editorial = new TableColumn<>("Editorial");
+        data_prestec = new TableColumn<>("Data Prestec");
+
+        isbn.setCellValueFactory(new PropertyValueFactory("isbn"));
+        titol.setCellValueFactory(new PropertyValueFactory("titol"));
+        autor.setCellValueFactory(new PropertyValueFactory("autor"));
+        editorial.setCellValueFactory(new PropertyValueFactory("editorial"));
+        data_prestec.setCellValueFactory(new PropertyValueFactory("data_prestec"));
+
+        taula.getColumns().addAll(isbn, titol, autor, editorial, data_prestec);
+
+        carregarDades();
     }
 
     @FXML
@@ -89,5 +94,18 @@ public class ControladorLlibres {
     @FXML
     private void eliminar() throws IOException {
         System.out.println("Aquest metode encara no fa res");
+    }
+
+    public void carregarDades() {
+        SingleSession session = new SingleSession();
+
+        Query query = session.getSessio().createQuery("FROM Llibre");
+        List<Llibre> llista = query.list();
+
+        for (Llibre llibre : llista) {
+            this.dadesTaula.add(llibre);
+        }
+
+        this.taula.setItems(dadesTaula);
     }
 }
