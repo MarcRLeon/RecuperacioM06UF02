@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 public class ControladorModificarUsuari {
@@ -75,6 +76,7 @@ public class ControladorModificarUsuari {
 
     @FXML
     private void modificar() throws IOException {
+        SingleSession sessio = new SingleSession();
         Usuari u = this.taula.getSelectionModel().getSelectedItem();
         if (u == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -92,7 +94,11 @@ public class ControladorModificarUsuari {
                 u.setDireccio(usuari.getDireccio());
                 u.setTelefon(usuari.getTelefon());
                 u.setData_prestec(usuari.getData_prestec());
-                
+
+                sessio.getSessio().beginTransaction();
+
+                sessio.getSessio().update(u);
+                sessio.getSessio().getTransaction().commit();
                 this.taula.refresh();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

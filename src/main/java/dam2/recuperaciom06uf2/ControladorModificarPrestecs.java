@@ -69,6 +69,8 @@ public class ControladorModificarPrestecs {
 
     @FXML
     private void modificar() throws IOException {
+        SingleSession sessio = new SingleSession();
+
         Prestec p1 = this.taula.getSelectionModel().getSelectedItem();
         if (p1 == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -85,6 +87,11 @@ public class ControladorModificarPrestecs {
                 p1.setData_prestec(p2.getData_prestec());
                 p1.setData_devolucio(p2.getData_devolucio());
                 p1.setId_usuari(p2.getId_usuari());
+
+                sessio.getSessio().beginTransaction();
+
+                sessio.getSessio().update(p1);
+                sessio.getSessio().getTransaction().commit();
                 this.taula.refresh();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

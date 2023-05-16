@@ -73,6 +73,8 @@ public class ControladorModificarLlibres {
 
     @FXML
     private void modificar() throws IOException {
+        SingleSession sessio = new SingleSession();
+
         Llibre llibre = this.taula.getSelectionModel().getSelectedItem();
         if (llibre == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -90,6 +92,11 @@ public class ControladorModificarLlibres {
                 llibre.setAutor(llibre2.getAutor());
                 llibre.setEditorial(llibre2.getEditorial());
                 llibre.setId_prestec(llibre2.getId_prestec());
+
+                sessio.getSessio().beginTransaction();
+
+                sessio.getSessio().update(llibre);
+                sessio.getSessio().getTransaction().commit();
                 this.taula.refresh();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
