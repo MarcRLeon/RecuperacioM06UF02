@@ -28,10 +28,10 @@ public class ControladorAltaPrestecs {
     TableView<Prestec> taula;
 
     @FXML
-    TextField txt_idUsuari, txt_dataDevolucio, txt_dataPrestec;
+    TextField txt_idPrestec, txt_idUsuari, txt_dataDevolucio, txt_dataPrestec;
 
     @FXML
-    TableColumn<Prestec, Integer> ID;
+    TableColumn<Prestec, Integer> ID, id_usuari;
 
     @FXML
     TableColumn<Prestec, Date> data_prestec, data_devolucio;
@@ -42,12 +42,14 @@ public class ControladorAltaPrestecs {
         ID = new TableColumn<>("ID");
         data_devolucio = new TableColumn<>("Data Devolucio");
         data_prestec = new TableColumn<>("Data Prestec");
+        id_usuari = new TableColumn<>("ID Usuari");
 
         ID.setCellValueFactory(new PropertyValueFactory("ID"));
         data_devolucio.setCellValueFactory(new PropertyValueFactory("data_devolucio"));
         data_prestec.setCellValueFactory(new PropertyValueFactory("data_prestec"));
+        id_usuari.setCellValueFactory(new PropertyValueFactory("id_usuari"));
 
-        taula.getColumns().addAll(ID, data_devolucio, data_prestec);
+        taula.getColumns().addAll(ID, data_devolucio, data_prestec, id_usuari);
 
         carregarDades();
     }
@@ -77,13 +79,16 @@ public class ControladorAltaPrestecs {
         Session session = SingleSession.getInstance().getSessio();
 
         session.beginTransaction();
-        int id = Integer.parseInt(txt_idUsuari.getText());
-        Prestec prestec = new Prestec(faker.date().birthday(), faker.date().birthday(), id);
+        int id = Integer.parseInt(txt_idPrestec.getText()), id_usuari = Integer.parseInt(txt_idUsuari.getText());
+        Prestec prestec = new Prestec(id, faker.date().birthday(), faker.date().birthday(), id_usuari);
 
         System.out.println(prestec.toString());
         session.save(prestec);
-
         session.getTransaction().commit();
+
+        dadesTaula.clear();
+        carregarDades();
+        taula.refresh();
     }
 
     public void carregarDades() {

@@ -22,7 +22,10 @@ public class Prestec {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "data_prestec",nullable = false)
+    @Column(name = "id_prestec", nullable = false)
+    private int id_prestec;
+
+    @Column(name = "data_prestec", nullable = false)
     private Date data_prestec;
 
     @Column(name = "data_devolucio", nullable = false)
@@ -34,7 +37,8 @@ public class Prestec {
     public Prestec() {
     }
 
-    public Prestec(Date data_prestec, Date data_devolucio, int ID_USUARI) {
+    public Prestec(int id_prestec, Date data_prestec, Date data_devolucio, int ID_USUARI) {
+        this.id_prestec = id_prestec;
         this.data_prestec = data_prestec;
         this.data_devolucio = data_devolucio;
         this.ID_USUARI = ID_USUARI;
@@ -64,9 +68,16 @@ public class Prestec {
         this.ID_USUARI = ID_USUARI;
     }
 
-    @Override
-    public String toString() {
-        return "Prestec{" + "data_prestec=" + data_prestec + ", data_devolucio=" + data_devolucio + ", ID_USUARI=" + ID_USUARI + '}';
+    public int getId_prestec() {
+        return id_prestec;
     }
 
+    public void setId_prestec(int id_prestec) {
+        this.id_prestec = id_prestec;
+    }
+
+    @Override
+    public String toString() {
+        return "Prestec{" + "id_prestec=" + id_prestec + ", data_prestec=" + data_prestec + ", data_devolucio=" + data_devolucio + ", ID_USUARI=" + ID_USUARI + '}';
+    }
 }

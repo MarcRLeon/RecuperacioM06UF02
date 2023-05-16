@@ -24,14 +24,6 @@ public class Usuari {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     @Column(name = "nom", nullable = false)
     private String nom;
 
@@ -52,6 +44,14 @@ public class Usuari {
         this.direccio = direccio;
         this.telefon = telefon;
         this.data_prestec = data_prestec;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getNom() {

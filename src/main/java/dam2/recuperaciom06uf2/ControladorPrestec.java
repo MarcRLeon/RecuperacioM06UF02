@@ -25,23 +25,25 @@ public class ControladorPrestec {
     TableView<Prestec> taula;
 
     @FXML
-    TableColumn<Prestec, Integer> ID;
+    TableColumn<Prestec, Integer> ID, id_usuari;
 
     @FXML
     TableColumn<Prestec, Date> data_prestec, data_devolucio;
 
     private final ObservableList<Prestec> dadesTaula = FXCollections.observableArrayList();
 
-    public void initialize() {
+      public void initialize() {
         ID = new TableColumn<>("ID");
         data_devolucio = new TableColumn<>("Data Devolucio");
         data_prestec = new TableColumn<>("Data Prestec");
+        id_usuari = new TableColumn<>("ID Usuari"); 
 
         ID.setCellValueFactory(new PropertyValueFactory("ID"));
         data_devolucio.setCellValueFactory(new PropertyValueFactory("data_devolucio"));
         data_prestec.setCellValueFactory(new PropertyValueFactory("data_prestec"));
-
-        taula.getColumns().addAll(ID, data_devolucio, data_prestec);
+        id_usuari.setCellValueFactory(new PropertyValueFactory("id_usuari"));
+        
+        taula.getColumns().addAll(ID, data_devolucio, data_prestec, id_usuari);
 
         carregarDades();
     }
