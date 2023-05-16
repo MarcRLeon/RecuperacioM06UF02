@@ -1,6 +1,5 @@
 package dam2.recuperaciom06uf2;
 
-import Classes.Llibre;
 import Classes.Usuari;
 import Conexio.SingleSession;
 import java.io.IOException;
@@ -52,9 +51,6 @@ public class ControladorUsuaris {
         direccio.setCellValueFactory(new PropertyValueFactory("direccio"));
         telefon.setCellValueFactory(new PropertyValueFactory("telefon"));
         data_prestec.setCellValueFactory(new PropertyValueFactory("data_prestec"));
-
-        
-//        taula.getColumns().addAll(id, nom, direccio, telefon, data_prestec);
 
         carregarDades();
     }
@@ -114,7 +110,7 @@ public class ControladorUsuaris {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
-            alert.setContentText("Tents que seleccionar un Llibre");
+            alert.setContentText("Tents que seleccionar un Usuari");
             alert.showAndWait();
         } else {
             this.dadesTaula.remove(u);

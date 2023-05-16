@@ -15,7 +15,7 @@
         <Button layoutX="165.0" layoutY="376.0" mnemonicParsing="false" onAction="#afegir" text="Donar Alta" />
         <TableView fx:id="taula" layoutX="39.0" layoutY="86.0" prefHeight="269.0" prefWidth="618.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="ID Prestec" />
+            <TableColumn fx:id="id_prestec" prefWidth="75.0" text="ID Prestec" />
             <TableColumn fx:id="data_prestec" prefWidth="181.0" text="Data Prestec" />
             <TableColumn fx:id="data_devolucio" prefWidth="149.0" text="Data Devolucio" />
             <TableColumn fx:id="id_usuari" prefWidth="212.0" text="ID Usuari" />

@@ -19,7 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 public class ControladorModificarUsuari {
@@ -28,7 +27,7 @@ public class ControladorModificarUsuari {
     TableView<Usuari> taula;
 
     @FXML
-    TableColumn<Usuari, Integer> id = new TableColumn<>("ID");
+    TableColumn<Usuari, Integer> id;
 
     @FXML
     TableColumn<Usuari, String> nom, direccio;
@@ -76,38 +75,48 @@ public class ControladorModificarUsuari {
 
     @FXML
     private void modificar() throws IOException {
-        SingleSession sessio = new SingleSession();
-        Usuari u = this.taula.getSelectionModel().getSelectedItem();
-        if (u == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Tents que seleccionar un Usuari");
-            alert.showAndWait();
-        } else {
-            Date data = Date.valueOf(txt_dataPrestec.getText());
-            int telefon = Integer.parseInt(txt_telefon.getText());
-
-            Usuari usuari = new Usuari(txt_nom.getText(), txt_direccio.getText(), telefon, data);
-            if (!this.dadesTaula.contains(usuari)) {
-                u.setNom(usuari.getNom());
-                u.setDireccio(usuari.getDireccio());
-                u.setTelefon(usuari.getTelefon());
-                u.setData_prestec(usuari.getData_prestec());
-
-                sessio.getSessio().beginTransaction();
-
-                sessio.getSessio().update(u);
-                sessio.getSessio().getTransaction().commit();
-                this.taula.refresh();
-            } else {
+        try {
+            SingleSession sessio = new SingleSession();
+            Usuari u = this.taula.getSelectionModel().getSelectedItem();
+            if (u == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setTitle("Error");
-                alert.setContentText("L'usuari ja existeix");
+                alert.setContentText("Has de selccionar un Usuari");
                 alert.showAndWait();
+            } else {
+                Date data = Date.valueOf(txt_dataPrestec.getText());
+                int telefon = Integer.parseInt(txt_telefon.getText());
+
+                Usuari usuari = new Usuari(txt_nom.getText(), txt_direccio.getText(), telefon, data);
+
+                if (!this.dadesTaula.contains(usuari)) {
+                    u.setNom(usuari.getNom());
+                    u.setDireccio(usuari.getDireccio());
+                    u.setTelefon(usuari.getTelefon());
+                    u.setData_prestec(usuari.getData_prestec());
+
+                    sessio.getSessio().beginTransaction();
+
+                    sessio.getSessio().update(u);
+                    sessio.getSessio().getTransaction().commit();
+                    this.taula.refresh();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Error");
+                    alert.setContentText("L'usuari ja existeix");
+                    alert.showAndWait();
+                }
             }
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("No pots deixar res en blanc");
+            alert.showAndWait();
         }
+
     }
 
     public void carregarDades() {

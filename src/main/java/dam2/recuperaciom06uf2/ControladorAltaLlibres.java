@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,7 +30,7 @@ public class ControladorAltaLlibres {
     TextField txt_isbn, txt_titol, txt_autor, txt_editorial, txt_idPrestec;
 
     @FXML
-    TableColumn<Llibre, Integer> id= new TableColumn<>("ID"), isbn, id_prestec;
+    TableColumn<Llibre, Integer> id, isbn, id_prestec;
 
     @FXML
     TableColumn<Llibre, String> titol, autor, editorial;
@@ -44,7 +45,6 @@ public class ControladorAltaLlibres {
         autor.setCellValueFactory(new PropertyValueFactory("autor"));
         editorial.setCellValueFactory(new PropertyValueFactory("editorial"));
         id_prestec.setCellValueFactory(new PropertyValueFactory("id_prestec"));
-
 
         carregarDades();
     }
@@ -70,21 +70,28 @@ public class ControladorAltaLlibres {
 
     @FXML
     private void afegir() throws IOException {
+        try {
+            Session session = SingleSession.getInstance().getSessio();
 
-        Session session = SingleSession.getInstance().getSessio();
+            int idPrestec = Integer.parseInt(this.txt_idPrestec.getText()), ISBN = Integer.parseInt(txt_isbn.getText());
+            session.beginTransaction();
 
-        int idPrestec = Integer.parseInt(this.txt_idPrestec.getText()), ISBN = Integer.parseInt(txt_isbn.getText());
-        session.beginTransaction();
+            Llibre llibre = new Llibre(ISBN, txt_titol.getText(), txt_autor.getText(), txt_editorial.getText(), idPrestec);
 
-        Llibre llibre = new Llibre(ISBN, txt_titol.getText(), txt_autor.getText(), txt_editorial.getText(), idPrestec);
+            session.save(llibre);
 
-        session.save(llibre);
+            session.getTransaction().commit();
 
-        session.getTransaction().commit();
-
-        dadesTaula.clear();
-        carregarDades();
-        taula.refresh();
+            dadesTaula.clear();
+            carregarDades();
+            taula.refresh();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Et falta informacio per afegir");
+            alert.showAndWait();
+        }
 
     }
 

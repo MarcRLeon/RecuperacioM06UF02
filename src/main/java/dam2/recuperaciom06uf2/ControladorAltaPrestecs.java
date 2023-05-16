@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,7 +31,7 @@ public class ControladorAltaPrestecs {
     TextField txt_idUsuari, txt_dataDevolucio, txt_dataPrestec;
 
     @FXML
-    TableColumn<Prestec, Integer> id_prestec = new TableColumn<>("ID Prestec"), id_usuari;
+    TableColumn<Prestec, Integer> id_prestec, id_usuari;
 
     @FXML
     TableColumn<Prestec, Date> data_prestec, data_devolucio;
@@ -67,21 +68,29 @@ public class ControladorAltaPrestecs {
     }
 
     @FXML
-    private void afegir() throws IOException {       
-        Session session = SingleSession.getInstance().getSessio();
+    private void afegir() throws IOException {
+        try {
+            Session session = SingleSession.getInstance().getSessio();
 
-        session.beginTransaction();
-        int id_usuari = Integer.parseInt(txt_idUsuari.getText());
-        Date dataPrestec = Date.valueOf(txt_dataPrestec.getText()), dataDevolucio = Date.valueOf(txt_dataDevolucio.getText());
-        Prestec prestec = new Prestec(dataPrestec, dataDevolucio, id_usuari);
+            session.beginTransaction();
+            int id_usuari = Integer.parseInt(txt_idUsuari.getText());
+            Date dataPrestec = Date.valueOf(txt_dataPrestec.getText()), dataDevolucio = Date.valueOf(txt_dataDevolucio.getText());
+            Prestec prestec = new Prestec(dataPrestec, dataDevolucio, id_usuari);
 
-        System.out.println(prestec.toString());
-        session.save(prestec);
-        session.getTransaction().commit();
+            System.out.println(prestec.toString());
+            session.save(prestec);
+            session.getTransaction().commit();
 
-        dadesTaula.clear();
-        carregarDades();
-        taula.refresh();
+            dadesTaula.clear();
+            carregarDades();
+            taula.refresh();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Et falta informacio per afegir");
+            alert.showAndWait();
+        }
     }
 
     public void carregarDades() {

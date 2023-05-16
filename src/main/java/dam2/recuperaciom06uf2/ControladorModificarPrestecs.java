@@ -31,7 +31,7 @@ public class ControladorModificarPrestecs {
     TextField txt_idPrestec, txt_idUsuari, txt_dataDevolucio, txt_dataPrestec;
 
     @FXML
-    TableColumn<Prestec, Integer> id_prestec = new TableColumn<>("ID Prestec"), id_usuari;
+    TableColumn<Prestec, Integer> id_prestec, id_usuari;
 
     @FXML
     TableColumn<Prestec, Date> data_prestec, data_devolucio;
@@ -69,37 +69,46 @@ public class ControladorModificarPrestecs {
 
     @FXML
     private void modificar() throws IOException {
-        SingleSession sessio = new SingleSession();
+        try {
+            SingleSession sessio = new SingleSession();
 
-        Prestec p1 = this.taula.getSelectionModel().getSelectedItem();
-        if (p1 == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Tents que seleccionar un Llibre");
-            alert.showAndWait();
-        } else {
-
-            Date data_prestec = Date.valueOf(txt_dataPrestec.getText()), data_devolucio = Date.valueOf(txt_dataDevolucio.getText());
-            int idUsuari = Integer.parseInt(txt_idUsuari.getText());
-            Prestec p2 = new Prestec(data_prestec, data_devolucio, idUsuari);
-            if (!this.dadesTaula.contains(p2)) {
-                p1.setData_prestec(p2.getData_prestec());
-                p1.setData_devolucio(p2.getData_devolucio());
-                p1.setId_usuari(p2.getId_usuari());
-
-                sessio.getSessio().beginTransaction();
-
-                sessio.getSessio().update(p1);
-                sessio.getSessio().getTransaction().commit();
-                this.taula.refresh();
-            } else {
+            Prestec p1 = this.taula.getSelectionModel().getSelectedItem();
+            if (p1 == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setTitle("Error");
-                alert.setContentText("El llibre ja existeix");
+                alert.setContentText("Has de seleccionar un Prestec");
                 alert.showAndWait();
+            } else {
+
+                Date data_prestec = Date.valueOf(txt_dataPrestec.getText()), data_devolucio = Date.valueOf(txt_dataDevolucio.getText());
+                int idUsuari = Integer.parseInt(txt_idUsuari.getText());
+                Prestec p2 = new Prestec(data_prestec, data_devolucio, idUsuari);
+                if (!this.dadesTaula.contains(p2)) {
+                    p1.setData_prestec(p2.getData_prestec());
+                    p1.setData_devolucio(p2.getData_devolucio());
+                    p1.setId_usuari(p2.getId_usuari());
+
+                    sessio.getSessio().beginTransaction();
+
+                    sessio.getSessio().update(p1);
+                    sessio.getSessio().getTransaction().commit();
+                    this.taula.refresh();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Error");
+                    alert.setContentText("El llibre ja existeix");
+                    alert.showAndWait();
+                }
             }
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText(" Et falta informacio per afegir ");
+            alert.showAndWait();
+
         }
     }
 

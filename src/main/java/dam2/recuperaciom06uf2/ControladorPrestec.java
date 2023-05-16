@@ -1,6 +1,5 @@
 package dam2.recuperaciom06uf2;
 
-import Classes.Llibre;
 import Classes.Prestec;
 import Conexio.SingleSession;
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class ControladorPrestec {
     TableView<Prestec> taula;
 
     @FXML
-    TableColumn<Prestec, Integer> id_prestec = new TableColumn<>("ID Prestec"), id_usuari;
+    TableColumn<Prestec, Integer> id_prestec, id_usuari;
 
     @FXML
     TableColumn<Prestec, Date> data_prestec, data_devolucio;

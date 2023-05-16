@@ -29,7 +29,7 @@ public class ControladorLlibres {
     @FXML
     private TableView<Llibre> taula;
     @FXML
-    TableColumn<Llibre, Integer> id = new TableColumn<>("ID"), isbn, id_prestec;
+    TableColumn<Llibre, Integer> id, isbn, id_prestec;
 
     @FXML
     TableColumn<Llibre, String> titol, autor, editorial;
@@ -44,7 +44,6 @@ public class ControladorLlibres {
         autor.setCellValueFactory(new PropertyValueFactory("autor"));
         editorial.setCellValueFactory(new PropertyValueFactory("editorial"));
         id_prestec.setCellValueFactory(new PropertyValueFactory("id_prestec"));
-
 
         carregarDades();
     }

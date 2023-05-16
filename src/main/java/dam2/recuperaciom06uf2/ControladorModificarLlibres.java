@@ -1,11 +1,8 @@
 package dam2.recuperaciom06uf2;
 
 import Classes.Llibre;
-import Classes.Usuari;
 import Conexio.SingleSession;
-import com.github.javafaker.Faker;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +18,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 public class ControladorModificarLlibres {
@@ -33,7 +29,7 @@ public class ControladorModificarLlibres {
     TextField txt_isbn, txt_titol, txt_autor, txt_editorial, txt_idPrestec;
 
     @FXML
-    TableColumn<Llibre, Integer> id = new TableColumn<>("ID"), isbn, id_prestec;
+    TableColumn<Llibre, Integer> id, isbn, id_prestec;
 
     @FXML
     TableColumn<Llibre, String> titol, autor, editorial;
@@ -73,38 +69,46 @@ public class ControladorModificarLlibres {
 
     @FXML
     private void modificar() throws IOException {
-        SingleSession sessio = new SingleSession();
+        try {
+            SingleSession sessio = new SingleSession();
 
-        Llibre llibre = this.taula.getSelectionModel().getSelectedItem();
-        if (llibre == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Tents que seleccionar un Llibre");
-            alert.showAndWait();
-        } else {
-
-            int isbn = Integer.parseInt(txt_isbn.getText()), idPrestec = Integer.parseInt(txt_idPrestec.getText());
-            Llibre llibre2 = new Llibre(isbn, txt_titol.getText(), txt_autor.getText(), txt_editorial.getText(), idPrestec);
-            if (!this.dadesTaula.contains(llibre2)) {
-                llibre.setIsbn(llibre2.getIsbn());
-                llibre.setTitol(llibre2.getTitol());
-                llibre.setAutor(llibre2.getAutor());
-                llibre.setEditorial(llibre2.getEditorial());
-                llibre.setId_prestec(llibre2.getId_prestec());
-
-                sessio.getSessio().beginTransaction();
-
-                sessio.getSessio().update(llibre);
-                sessio.getSessio().getTransaction().commit();
-                this.taula.refresh();
-            } else {
+            Llibre llibre = this.taula.getSelectionModel().getSelectedItem();
+            if (llibre == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setTitle("Error");
-                alert.setContentText("El llibre ja existeix");
+                alert.setContentText("Has de seleccionar un Llibre");
                 alert.showAndWait();
+            } else {
+
+                int isbn = Integer.parseInt(txt_isbn.getText()), idPrestec = Integer.parseInt(txt_idPrestec.getText());
+                Llibre llibre2 = new Llibre(isbn, txt_titol.getText(), txt_autor.getText(), txt_editorial.getText(), idPrestec);
+                if (!this.dadesTaula.contains(llibre2)) {
+                    llibre.setIsbn(llibre2.getIsbn());
+                    llibre.setTitol(llibre2.getTitol());
+                    llibre.setAutor(llibre2.getAutor());
+                    llibre.setEditorial(llibre2.getEditorial());
+                    llibre.setId_prestec(llibre2.getId_prestec());
+
+                    sessio.getSessio().beginTransaction();
+
+                    sessio.getSessio().update(llibre);
+                    sessio.getSessio().getTransaction().commit();
+                    this.taula.refresh();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Error");
+                    alert.setContentText("El llibre ja existeix");
+                    alert.showAndWait();
+                }
             }
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText(" Et falta informacio per afegir ");
+            alert.showAndWait();
         }
     }
 
