@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -74,8 +75,33 @@ public class ControladorModificarUsuari {
 
     @FXML
     private void modificar() throws IOException {
-        System.out.println("Aquest metode encara no fa res");
+        Usuari u = this.taula.getSelectionModel().getSelectedItem();
+        if (u == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Tents que seleccionar un Usuari");
+            alert.showAndWait();
+        } else {
+            Date data = Date.valueOf(txt_dataPrestec.getText());
+            int telefon = Integer.parseInt(txt_telefon.getText());
 
+            Usuari usuari = new Usuari(txt_nom.getText(), txt_direccio.getText(), telefon, data);
+            if (!this.dadesTaula.contains(usuari)) {
+                u.setNom(usuari.getNom());
+                u.setDireccio(usuari.getDireccio());
+                u.setTelefon(usuari.getTelefon());
+                u.setData_prestec(usuari.getData_prestec());
+                
+                this.taula.refresh();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("L'usuari ja existeix");
+                alert.showAndWait();
+            }
+        }
     }
 
     public void carregarDades() {

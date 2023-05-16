@@ -2,7 +2,6 @@ package dam2.recuperaciom06uf2;
 
 import Classes.Prestec;
 import Conexio.SingleSession;
-import com.github.javafaker.Faker;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
@@ -28,10 +27,10 @@ public class ControladorAltaPrestecs {
     TableView<Prestec> taula;
 
     @FXML
-    TextField txt_idPrestec, txt_idUsuari, txt_dataDevolucio, txt_dataPrestec;
+    TextField txt_idUsuari, txt_dataDevolucio, txt_dataPrestec;
 
     @FXML
-    TableColumn<Prestec, Integer> id_prestec= new TableColumn<>("ID Prestec"), id_usuari;
+    TableColumn<Prestec, Integer> id_prestec = new TableColumn<>("ID Prestec"), id_usuari;
 
     @FXML
     TableColumn<Prestec, Date> data_prestec, data_devolucio;
@@ -44,7 +43,6 @@ public class ControladorAltaPrestecs {
         data_devolucio.setCellValueFactory(new PropertyValueFactory("data_devolucio"));
         data_prestec.setCellValueFactory(new PropertyValueFactory("data_prestec"));
         id_usuari.setCellValueFactory(new PropertyValueFactory("id_usuari"));
-
 
         carregarDades();
     }
@@ -69,13 +67,13 @@ public class ControladorAltaPrestecs {
     }
 
     @FXML
-    private void afegir() throws IOException {
-        Faker faker = new Faker();
+    private void afegir() throws IOException {       
         Session session = SingleSession.getInstance().getSessio();
 
         session.beginTransaction();
-        int id = Integer.parseInt(txt_idPrestec.getText()), id_usuari = Integer.parseInt(txt_idUsuari.getText());
-        Prestec prestec = new Prestec(id, faker.date().birthday(), faker.date().birthday(), id_usuari);
+        int id_usuari = Integer.parseInt(txt_idUsuari.getText());
+        Date dataPrestec = Date.valueOf(txt_dataPrestec.getText()), dataDevolucio = Date.valueOf(txt_dataDevolucio.getText());
+        Prestec prestec = new Prestec(dataPrestec, dataDevolucio, id_usuari);
 
         System.out.println(prestec.toString());
         session.save(prestec);

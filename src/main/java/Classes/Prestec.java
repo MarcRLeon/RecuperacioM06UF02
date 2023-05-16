@@ -37,8 +37,7 @@ public class Prestec {
     public Prestec() {
     }
 
-    public Prestec(int id_prestec, Date data_prestec, Date data_devolucio, int ID_USUARI) {
-        this.id_prestec = id_prestec;
+    public Prestec(Date data_prestec, Date data_devolucio, int ID_USUARI) {
         this.data_prestec = data_prestec;
         this.data_devolucio = data_devolucio;
         this.id_usuari = ID_USUARI;
@@ -75,8 +74,6 @@ public class Prestec {
     public void setId_usuari(int id_usuari) {
         this.id_usuari = id_usuari;
     }
-
-
 
     @Override
     public String toString() {

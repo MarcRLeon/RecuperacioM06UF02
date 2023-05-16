@@ -2,7 +2,6 @@ package dam2.recuperaciom06uf2;
 
 import Classes.Usuari;
 import Conexio.SingleSession;
-import com.github.javafaker.Faker;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
@@ -76,12 +75,13 @@ public class ControladorAltaUsuari {
 
     @FXML
     private void afegir() throws IOException {
-        Faker faker = new Faker();
+
         Session session = SingleSession.getInstance().getSessio();
         int telefon = Integer.parseInt(txt_telefon.getText());
+        Date dataPrestec = Date.valueOf(txt_dataPrestec.getText());
         session.beginTransaction();
 
-        Usuari usuari = new Usuari(txt_nom.getText(), txt_direccio.getText(), telefon, faker.date().birthday());
+        Usuari usuari = new Usuari(txt_nom.getText(), txt_direccio.getText(), telefon, dataPrestec);
         session.save(usuari);
         session.getTransaction().commit();
 

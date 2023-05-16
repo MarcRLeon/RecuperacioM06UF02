@@ -103,7 +103,7 @@ public class ControladorPrestec {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
-            alert.setContentText("Tents que seleccionar un Llibre");
+            alert.setContentText("Tents que seleccionar un Prestec");
             alert.showAndWait();
         } else {
             this.dadesTaula.remove(p);
