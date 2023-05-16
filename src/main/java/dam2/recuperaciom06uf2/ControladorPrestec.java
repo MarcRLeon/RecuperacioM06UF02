@@ -87,10 +87,20 @@ public class ControladorPrestec {
         newStage.show();
     }
 
-    @FXML
-    private void modificar() throws IOException {
-        System.out.println("Aquest metode encara no fa res");
+     @FXML
+    private void modificar(Event event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // Obtiene el Stage de la ventana actual
+        currentStage.close(); // Oculta la ventana actual
+
+        Stage newStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModificarPrestecs.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 820, 500); // Establece las dimensiones deseadas
+        newStage.setScene(scene);
+        newStage.show();
     }
+
 
     @FXML
     private void eliminar() throws IOException {

@@ -97,8 +97,18 @@ public class ControladorUsuaris {
 
     @FXML
     private void modificar(Event event) throws IOException {
-        System.out.println("Aquest metode encara no fa res");
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // Obtiene el Stage de la ventana actual
+        currentStage.close(); // Oculta la ventana actual
+
+        Stage newStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModificarUsuaris.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 820, 500); // Establece las dimensiones deseadas
+        newStage.setScene(scene);
+        newStage.show();
     }
+
 
     @FXML
     private void eliminar(Event event) throws IOException {
