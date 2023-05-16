@@ -29,7 +29,7 @@ public class ControladorLlibres {
     @FXML
     private TableView<Llibre> taula;
     @FXML
-    TableColumn<Llibre, Integer> id, isbn, id_prestec;
+    TableColumn<Llibre, Integer> id = new TableColumn<>("ID"), isbn, id_prestec;
 
     @FXML
     TableColumn<Llibre, String> titol, autor, editorial;
@@ -37,12 +37,6 @@ public class ControladorLlibres {
     private final ObservableList<Llibre> dadesTaula = FXCollections.observableArrayList();
 
     public void initialize() {
-        id = new TableColumn<>("ID");
-        isbn = new TableColumn<>("ISBN");
-        titol = new TableColumn<>("Titol");
-        autor = new TableColumn<>("Autor");
-        editorial = new TableColumn<>("Editorial");
-        id_prestec = new TableColumn<>("ID Prestec");
 
         id.setCellValueFactory(new PropertyValueFactory("id"));
         isbn.setCellValueFactory(new PropertyValueFactory("isbn"));
@@ -51,7 +45,6 @@ public class ControladorLlibres {
         editorial.setCellValueFactory(new PropertyValueFactory("editorial"));
         id_prestec.setCellValueFactory(new PropertyValueFactory("id_prestec"));
 
-        taula.getColumns().addAll(id, isbn, titol, autor, editorial, id_prestec);
 
         carregarDades();
     }

@@ -22,7 +22,7 @@ public class Llibre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private int id = 1;
 
     @Column(name = "isbn", nullable = false)
     private int isbn;

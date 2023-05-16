@@ -46,11 +46,6 @@ public class ControladorUsuaris {
     private final ObservableList<Usuari> dadesTaula = FXCollections.observableArrayList();
 
     public void initialize() {
-        id = new TableColumn<>("ID");
-        nom = new TableColumn<>("nom");
-        direccio = new TableColumn<>("direccio");
-        telefon = new TableColumn<>("telefon");
-        data_prestec = new TableColumn<>("Data Prestec");
 
         id.setCellValueFactory(new PropertyValueFactory("ID"));
         nom.setCellValueFactory(new PropertyValueFactory("nom"));
@@ -58,7 +53,8 @@ public class ControladorUsuaris {
         telefon.setCellValueFactory(new PropertyValueFactory("telefon"));
         data_prestec.setCellValueFactory(new PropertyValueFactory("data_prestec"));
 
-        taula.getColumns().addAll(id, nom, direccio, telefon, data_prestec);
+        
+//        taula.getColumns().addAll(id, nom, direccio, telefon, data_prestec);
 
         carregarDades();
     }
@@ -108,7 +104,6 @@ public class ControladorUsuaris {
         newStage.setScene(scene);
         newStage.show();
     }
-
 
     @FXML
     private void eliminar(Event event) throws IOException {

@@ -28,7 +28,7 @@ public class ControladorAltaUsuari {
     TableView<Usuari> taula;
 
     @FXML
-    TableColumn<Usuari, Integer> id;
+    TableColumn<Usuari, Integer> id = new TableColumn<>("ID");
 
     @FXML
     TableColumn<Usuari, String> nom, direccio;
@@ -45,19 +45,12 @@ public class ControladorAltaUsuari {
     TextField txt_nom, txt_direccio, txt_telefon, txt_dataPrestec;
 
     public void initialize() {
-        id = new TableColumn<>("ID");
-        nom = new TableColumn<>("nom");
-        direccio = new TableColumn<>("direccio");
-        telefon = new TableColumn<>("telefon");
-        data_prestec = new TableColumn<>("Data Prestec");
 
         id.setCellValueFactory(new PropertyValueFactory("ID"));
         nom.setCellValueFactory(new PropertyValueFactory("nom"));
         direccio.setCellValueFactory(new PropertyValueFactory("direccio"));
         telefon.setCellValueFactory(new PropertyValueFactory("telefon"));
         data_prestec.setCellValueFactory(new PropertyValueFactory("data_prestec"));
-
-        taula.getColumns().addAll(id, nom, direccio, telefon, data_prestec);
 
         carregarDades();
     }

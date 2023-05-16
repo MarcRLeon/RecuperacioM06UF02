@@ -1,52 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dam2.recuperaciom06uf2.ControladorModificarLlibres">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dam2.recuperaciom06uf2.ControladorModificarUsuari">
    <children>
-      <Text layoutX="342.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modificar Llibres">
+      <Text layoutX="342.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modificar Usuaris">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
       <Button layoutX="41.0" layoutY="21.0" mnemonicParsing="false" onAction="#tornarEnrere" text="Tornar Enrere" />
       <Button layoutX="370.0" layoutY="402.0" mnemonicParsing="false" onAction="#modificar" text="Modificar" />
-      <TableView fx:id="taula" layoutX="148.0" layoutY="105.0" prefHeight="283.0" prefWidth="569.0" />
-      <TextField fx:id="txt_isbn" layoutX="39.0" layoutY="118.0" prefHeight="31.0" prefWidth="91.0" />
-      <TextField fx:id="txt_titol" layoutX="39.0" layoutY="174.0" prefHeight="31.0" prefWidth="91.0" />
-      <TextField fx:id="txt_autor" layoutX="41.0" layoutY="237.0" prefHeight="31.0" prefWidth="91.0" />
-      <TextField fx:id="txt_editorial" layoutX="41.0" layoutY="301.0" prefHeight="31.0" prefWidth="91.0" />
-      <TextField fx:id="txt_idPrestec" layoutX="40.0" layoutY="357.0" prefHeight="31.0" prefWidth="91.0" />
-      <Text layoutX="51.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID Prestec">
+      <TableView fx:id="taula" layoutX="148.0" layoutY="105.0" prefHeight="283.0" prefWidth="569.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
+            <TableColumn fx:id="direccio" prefWidth="143.0" text="Direccio" />
+            <TableColumn fx:id="telefon" prefWidth="134.0" text="Telefon" />
+            <TableColumn fx:id="data_prestec" prefWidth="141.0" text="Data Prestec" />
+         </columns></TableView>
+      <TextField fx:id="txt_nom" layoutX="38.0" layoutY="152.0" prefHeight="31.0" prefWidth="91.0" />
+      <TextField fx:id="txt_direccio" layoutX="38.0" layoutY="208.0" prefHeight="31.0" prefWidth="91.0" />
+      <TextField fx:id="txt_telefon" layoutX="40.0" layoutY="271.0" prefHeight="31.0" prefWidth="91.0" />
+      <TextField fx:id="txt_dataPrestec" layoutX="40.0" layoutY="335.0" prefHeight="31.0" prefWidth="91.0" />
+      <Text layoutX="41.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Prestec">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="56.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editorial">
+      <Text layoutX="57.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="65.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor">
+      <Text layoutX="69.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="70.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text layoutX="69.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titol">
+      <Text layoutX="54.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direccio">
          <font>
             <Font size="16.0" />
          </font>
