@@ -31,7 +31,7 @@ public class ControladorAltaPrestecs {
     TextField txt_idPrestec, txt_idUsuari, txt_dataDevolucio, txt_dataPrestec;
 
     @FXML
-    TableColumn<Prestec, Integer> ID, id_usuari;
+    TableColumn<Prestec, Integer> id_prestec, id_usuari;
 
     @FXML
     TableColumn<Prestec, Date> data_prestec, data_devolucio;
@@ -39,17 +39,17 @@ public class ControladorAltaPrestecs {
     private final ObservableList<Prestec> dadesTaula = FXCollections.observableArrayList();
 
     public void initialize() {
-        ID = new TableColumn<>("ID");
+        id_prestec = new TableColumn<>("ID Prestec");
         data_devolucio = new TableColumn<>("Data Devolucio");
         data_prestec = new TableColumn<>("Data Prestec");
         id_usuari = new TableColumn<>("ID Usuari");
 
-        ID.setCellValueFactory(new PropertyValueFactory("ID"));
+        id_prestec.setCellValueFactory(new PropertyValueFactory("id_prestec"));
         data_devolucio.setCellValueFactory(new PropertyValueFactory("data_devolucio"));
         data_prestec.setCellValueFactory(new PropertyValueFactory("data_prestec"));
         id_usuari.setCellValueFactory(new PropertyValueFactory("id_usuari"));
 
-        taula.getColumns().addAll(ID, data_devolucio, data_prestec, id_usuari);
+        taula.getColumns().addAll(id_prestec, data_devolucio, data_prestec, id_usuari);
 
         carregarDades();
     }

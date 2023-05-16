@@ -28,33 +28,32 @@ public class ControladorAltaLlibres {
     TableView<Llibre> taula;
 
     @FXML
-    TextField txt_isbn, txt_titol, txt_autor, txt_editorial, txt_dataPrestec;
+    TextField txt_isbn, txt_titol, txt_autor, txt_editorial, txt_idPrestec;
 
     @FXML
-    TableColumn<Llibre, Integer> isbn;
+    TableColumn<Llibre, Integer> id, isbn, id_prestec;
 
     @FXML
     TableColumn<Llibre, String> titol, autor, editorial;
 
-    @FXML
-    TableColumn<Llibre, Date> data_prestec;
-
     private final ObservableList<Llibre> dadesTaula = FXCollections.observableArrayList();
 
     public void initialize() {
+        id = new TableColumn<>("ID");
         isbn = new TableColumn<>("ISBN");
         titol = new TableColumn<>("Titol");
         autor = new TableColumn<>("Autor");
         editorial = new TableColumn<>("Editorial");
-        data_prestec = new TableColumn<>("Data Prestec");
+        id_prestec = new TableColumn<>("ID Prestec");
 
+        id.setCellValueFactory(new PropertyValueFactory("id"));
         isbn.setCellValueFactory(new PropertyValueFactory("isbn"));
         titol.setCellValueFactory(new PropertyValueFactory("titol"));
         autor.setCellValueFactory(new PropertyValueFactory("autor"));
         editorial.setCellValueFactory(new PropertyValueFactory("editorial"));
-        data_prestec.setCellValueFactory(new PropertyValueFactory("data_prestec"));
+        id_prestec.setCellValueFactory(new PropertyValueFactory("id_prestec"));
 
-        taula.getColumns().addAll(isbn, titol, autor, editorial, data_prestec);
+        taula.getColumns().addAll(id, isbn, titol, autor, editorial, id_prestec);
 
         carregarDades();
     }
@@ -81,17 +80,20 @@ public class ControladorAltaLlibres {
     @FXML
     private void afegir() throws IOException {
 
-        Faker faker = new Faker();
         Session session = SingleSession.getInstance().getSessio();
 
+        int idPrestec = Integer.parseInt(this.txt_idPrestec.getText()), ISBN = Integer.parseInt(txt_isbn.getText());
         session.beginTransaction();
 
-        Llibre llibre = new Llibre(txt_isbn.getText(), txt_titol.getText(), txt_autor.getText(), txt_editorial.getText(),
-                faker.date().birthday());
+        Llibre llibre = new Llibre(ISBN, txt_titol.getText(), txt_autor.getText(), txt_editorial.getText(), idPrestec);
 
         session.save(llibre);
 
         session.getTransaction().commit();
+
+        dadesTaula.clear();
+        carregarDades();
+        taula.refresh();
 
     }
 

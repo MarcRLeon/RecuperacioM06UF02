@@ -31,8 +31,8 @@ public class Prestec {
     @Column(name = "data_devolucio", nullable = false)
     private Date data_devolucio;
 
-    @Column(name = "ID_USUARI", nullable = false)
-    private int ID_USUARI;
+    @Column(name = "id_usuari", nullable = false)
+    private int id_usuari;
 
     public Prestec() {
     }
@@ -41,7 +41,15 @@ public class Prestec {
         this.id_prestec = id_prestec;
         this.data_prestec = data_prestec;
         this.data_devolucio = data_devolucio;
-        this.ID_USUARI = ID_USUARI;
+        this.id_usuari = ID_USUARI;
+    }
+
+    public int getId_prestec() {
+        return id_prestec;
+    }
+
+    public void setId_prestec(int id_prestec) {
+        this.id_prestec = id_prestec;
     }
 
     public Date getData_prestec() {
@@ -60,24 +68,18 @@ public class Prestec {
         this.data_devolucio = data_devolucio;
     }
 
-    public int getID_USUARI() {
-        return ID_USUARI;
+    public int getId_usuari() {
+        return id_usuari;
     }
 
-    public void setID_USUARI(int ID_USUARI) {
-        this.ID_USUARI = ID_USUARI;
+    public void setId_usuari(int id_usuari) {
+        this.id_usuari = id_usuari;
     }
 
-    public int getId_prestec() {
-        return id_prestec;
-    }
 
-    public void setId_prestec(int id_prestec) {
-        this.id_prestec = id_prestec;
-    }
 
     @Override
     public String toString() {
-        return "Prestec{" + "id_prestec=" + id_prestec + ", data_prestec=" + data_prestec + ", data_devolucio=" + data_devolucio + ", ID_USUARI=" + ID_USUARI + '}';
+        return "Prestec{" + "id_prestec=" + id_prestec + ", data_prestec=" + data_prestec + ", data_devolucio=" + data_devolucio + ", ID_USUARI=" + id_usuari + '}';
     }
 }

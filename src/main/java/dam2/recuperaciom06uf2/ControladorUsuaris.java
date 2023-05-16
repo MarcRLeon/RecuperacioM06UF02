@@ -1,5 +1,6 @@
 package dam2.recuperaciom06uf2;
 
+import Classes.Llibre;
 import Classes.Usuari;
 import Conexio.SingleSession;
 import java.io.IOException;
@@ -13,10 +14,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 public class ControladorUsuaris {
@@ -95,7 +102,47 @@ public class ControladorUsuaris {
 
     @FXML
     private void eliminar(Event event) throws IOException {
-        System.out.println("Aquest metode encara no fa res");
+
+        Usuari u = this.taula.getSelectionModel().getSelectedItem();
+
+        if (u == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Tents que seleccionar un Llibre");
+            alert.showAndWait();
+        } else {
+            this.dadesTaula.remove(u);
+            taula.refresh();
+
+            Configuration configuration = new Configuration().configure();
+            SessionFactory sessionFactory = configuration.buildSessionFactory();
+
+            Session session = null;
+            Transaction transaction = null;
+
+            try {
+                session = sessionFactory.openSession();
+                transaction = session.beginTransaction();
+
+                // Supongamos que "TuEntidad" es el nombre de tu entidad y "id" es el identificador del registro que deseas eliminar
+                u = session.get(Usuari.class, u.getID());
+
+                session.delete(u);
+
+                transaction.commit();
+            } catch (HibernateException e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            } finally {
+                if (session != null) {
+                    session.close();
+                }
+            }
+
+        }
     }
 
     public void carregarDades() {

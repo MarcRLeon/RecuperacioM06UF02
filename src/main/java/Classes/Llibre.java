@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.util.Date;
 
 /**
  *
@@ -22,8 +21,11 @@ public class Llibre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private int id;
+
     @Column(name = "isbn", nullable = false)
-    private String isbn;
+    private int isbn;
 
     @Column(name = "titol", nullable = false)
     private String titol;
@@ -35,24 +37,32 @@ public class Llibre {
     private String editorial;
 
     @Column(name = "data_prestec", nullable = false)
-    private Date data_prestec;
+    private int id_prestec;
 
     public Llibre() {
     }
 
-    public Llibre(String isbn, String titol, String autor, String editorial, Date data_prestec) {
+    public Llibre(int isbn, String titol, String autor, String editorial, int id_prestec) {
         this.isbn = isbn;
         this.titol = titol;
         this.autor = autor;
         this.editorial = editorial;
-        this.data_prestec = data_prestec;
+        this.id_prestec = id_prestec;
     }
 
-    public String getIsbn() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
 
@@ -80,17 +90,17 @@ public class Llibre {
         this.editorial = editorial;
     }
 
-    public Date getData_prestec() {
-        return data_prestec;
+    public int getId_prestec() {
+        return id_prestec;
     }
 
-    public void setData_prestec(Date data_prestec) {
-        this.data_prestec = data_prestec;
+    public void setId_prestec(int id_prestec) {
+        this.id_prestec = id_prestec;
     }
 
     @Override
     public String toString() {
-        return "Llibre{" + "isbn=" + isbn + ", titol=" + titol + ", autor=" + autor + ", editorial=" + editorial + ", data_prestec=" + data_prestec + '}';
+        return "Llibre{" + "isbn=" + isbn + ", titol=" + titol + ", autor=" + autor + ", editorial=" + editorial + ", id_prestec=" + id_prestec + '}';
     }
 
 }
